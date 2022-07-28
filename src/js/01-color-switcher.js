@@ -20,5 +20,5 @@ function startChanging() {
   
   function stopChanging() {
     clearInterval(timerId);
-    stopBtn.setAttribute('disabled', true);
+    stopBtn.setAttribute('disabled', false);
   };
