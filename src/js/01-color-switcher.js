@@ -14,11 +14,11 @@ function startChanging() {
     timerId = setInterval(() => {
         body.style.backgroundColor = getRandomHexColor();
     }, 1000);
-    startBtn.setAttribute('(disabled', true);
+    startBtn.setAttribute('disabled', true);
   };
   
   
   function stopChanging() {
     clearInterval(timerId);
-    console.log(`Interval with id ${timerId} has stopped!`);
+    startBtn.setAttribute('disabled', true);
   };
