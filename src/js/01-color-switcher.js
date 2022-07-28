@@ -11,7 +11,7 @@ startBtn.addEventListener('click', startChanging);
 stopBtn.addEventListener('click', stopChanging);
 
 function startChanging() {
-    
+
     timerId = setInterval(() => {
         body.style.backgroundColor = getRandomHexColor();
     }, 1000);
@@ -20,5 +20,5 @@ function startChanging() {
   
   function stopChanging() {
     clearInterval(timerId);
-    startBtn.setAttribute('disabled', true);
+    stopBtn.setAttribute('disabled', true);
   };
