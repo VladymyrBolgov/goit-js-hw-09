@@ -14,13 +14,13 @@ function startChanging() {
     timerId = setInterval(() => {
         body.style.backgroundColor = getRandomHexColor();
     }, 1000);
-  startBtn.setAttribute('disabled', true);
-  stopBtn.disabled = false;
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
   };
   
 function stopChanging() {
     clearInterval(timerId);
-    stopBtn.setAttribute('disabled', false);
+    stopBtn.disabled = true;
     startBtn.disabled = false;
 };
   
