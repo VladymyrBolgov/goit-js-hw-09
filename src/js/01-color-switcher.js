@@ -15,7 +15,7 @@ function startChanging() {
         body.style.backgroundColor = getRandomHexColor();
     }, 1000);
   startBtn.setAttribute('disabled', true);
- 
+  stopBtn.disabled = false;
   };
   
   function stopChanging() {
