@@ -18,8 +18,9 @@ function startChanging() {
   stopBtn.disabled = false;
   };
   
-  function stopChanging() {
+function stopChanging() {
     clearInterval(timerId);
     stopBtn.setAttribute('disabled', false);
     startBtn.disabled = false;
-  };
+};
+  
