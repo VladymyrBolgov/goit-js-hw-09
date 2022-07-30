@@ -1,15 +1,14 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-const startBtn = document.querySelector('button[data-action-start]');
+const startBtn = document.querySelector('button[data-start]');
+const disabled = 'disabled';
+let chosenDate = null;
 
-
-
-let intervalId = null;
-const daysEle = document.querySelector('span[data-days]');
-const hoursEl = document.querySelector('span[data-hours]');
-const minutesEl = document.querySelector('span[data-minutes]');
-const secondsEl = document.querySelector('span[data-seconds]');
+const days = document.querySelector('span[data-days]');
+const hours = document.querySelector('span[data-hours]');
+const minutes = document.querySelector('span[data-minutes]');
+const seconds = document.querySelector('span[data-seconds]');
 
 const options = {
     enableTime: true,
@@ -17,11 +16,23 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-
-      console.log(selectedDates[0]);
+        chosenDate = selectedDates[0].getTime();
+        const deltaDate = chosenDate - Date.now();
+        if (deltaDate <= 0) {
+            startBtn.classList.add(disabled);
+            alert('Please choose a date in the future');
+            return;
+        }
+        startBtn.classList.remove(disabled);
+        return chosenDate;
     },
 };
-flatpickr(input, options);
+
+flatpickr('#datetime-picker', options);
+const inputDate = document.querySelector('#datetime-picker')._flatpickr;
+
+//--------------------------
+
 
 //----------------------------
 function convertMs(ms) {
@@ -41,4 +52,3 @@ function addLeadingZero(value) {
     return String(value).padStart(2, '0');
 }
 
-  
