@@ -1,6 +1,10 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
+const startBtn = document.querySelector('button[data-action-start]');
+
+
+
 let intervalId = null;
 const daysEle = document.querySelector('span[data-days]');
 const hoursEl = document.querySelector('span[data-hours]');
@@ -17,8 +21,9 @@ const options = {
       console.log(selectedDates[0]);
     },
 };
+flatpickr(input, options);
 
-
+//----------------------------
 function convertMs(ms) {
     const second = 1000;
     const minute = second * 60;
