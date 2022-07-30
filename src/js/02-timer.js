@@ -5,10 +5,10 @@ const startBtn = document.querySelector('button[data-start]');
 const disabled = 'disabled';
 let chosenDate = null;
 
-const days = document.querySelector('span[data-days]');
-const hours = document.querySelector('span[data-hours]');
-const minutes = document.querySelector('span[data-minutes]');
-const seconds = document.querySelector('span[data-seconds]');
+const daysEl = document.querySelector('span[data-days]');
+const hoursEl = document.querySelector('span[data-hours]');
+const minutesEl = document.querySelector('span[data-minutes]');
+const secondsEl = document.querySelector('span[data-seconds]');
 
 const options = {
     enableTime: true,
@@ -31,8 +31,22 @@ const options = {
 flatpickr('#datetime-picker', options);
 const inputDate = document.querySelector('#datetime-picker')._flatpickr;
 
-//--------------------------
+//-таймер-------------------------
+setInterval(() => {
+    const today = Date.now();
+    const elTime = chosenDate - today;
+    if (elTime <= 0) {
+            return
+        }
+    const convertedElTime = convertMs(elTime);
+    const { days, hours, minutes, seconds } = convertedElTime;
 
+    daysEl.textContent = days //< 10 ? `0${days}` : days;
+    hoursEl.textContent = hours //< 10 ? `0${hours}` : hours;
+    minutesEl.textContent = minutes //< 10 ? `0${minutes}` :minutes;
+    secondsEl.textContent = seconds //< 10 ? `0${seconds}` : seconds;
+
+}, 1000)
 
 //----------------------------
 function convertMs(ms) {
