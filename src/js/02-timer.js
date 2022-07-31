@@ -4,7 +4,6 @@ import Notiflix from 'notiflix';
 
 const startBtn = document.querySelector('button[data-start]');
 const disabled = 'disabled';
-
 let chosenDate = null;
 
 const daysEl = document.querySelector('span[data-days]');
@@ -20,13 +19,11 @@ const options = {
     onClose(selectedDates) {
         chosenDate = selectedDates[0].getTime();
         const dDate = chosenDate - Date.now();
-       if (dDate < 0) {
-            startBtn.classList.add(disabled);
+       if (dDate <= 0) {
             alert('Please choose a date in the future');
             return;
         }
-        startBtn.classList.remove('disabled');
-        return chosenDate;
+        startBtn.removeAttribute(disabled);
     },
 };
 
@@ -34,22 +31,26 @@ flatpickr('#datetime-picker', options);
 const inputDate = document.querySelector('#datetime-picker')._flatpickr;
 
 //-таймер-------------------------
-setInterval(() => {
-    const today = Date.now();
-    const elTime = chosenDate - today;
-    if (elTime <= 0) {
-            return
-        }
-    const convertedElTime = convertMs(elTime);
-    const { days, hours, minutes, seconds } = convertedElTime;
+startBtn.addEventListener('click', onClickTimer);
 
-    daysEl.textContent = days //< 10 ? `0${days}` : days;
-    hoursEl.textContent = hours //< 10 ? `0${hours}` : hours;
-    minutesEl.textContent = minutes //< 10 ? `0${minutes}` :minutes;
-    secondsEl.textContent = seconds //< 10 ? `0${seconds}` : seconds;
+function onClickTimer() {
+    
+    setInterval(() => {
+        const today = Date.now();
+        const elTime = chosenDate - today;
+        if (elTime <= 0) {
+                return
+            }
+        const convertedElTime = convertMs(elTime);
+        const { days, hours, minutes, seconds } = convertedElTime;
 
-}, 1000)
-
+        daysEl.textContent = days 
+        hoursEl.textContent = hours 
+        minutesEl.textContent = minutes 
+        secondsEl.textContent = seconds 
+    
+    }, 1000)
+}
 //----------------------------
 function convertMs(ms) {
     const second = 1000;
