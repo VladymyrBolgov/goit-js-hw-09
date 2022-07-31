@@ -1,8 +1,10 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import Notiflix from 'notiflix';
 
 const startBtn = document.querySelector('button[data-start]');
 const disabled = 'disabled';
+
 let chosenDate = null;
 
 const daysEl = document.querySelector('span[data-days]');
@@ -17,13 +19,13 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
         chosenDate = selectedDates[0].getTime();
-        const deltaDate = chosenDate - Date.now();
-        if (deltaDate <= 0) {
+        const dDate = chosenDate - Date.now();
+       if (dDate < 0) {
             startBtn.classList.add(disabled);
             alert('Please choose a date in the future');
             return;
         }
-        startBtn.classList.remove(disabled);
+        startBtn.classList.remove('disabled');
         return chosenDate;
     },
 };
@@ -65,4 +67,7 @@ function convertMs(ms) {
 function addLeadingZero(value) {
     return String(value).padStart(2, '0');
 }
+
+
+
 
