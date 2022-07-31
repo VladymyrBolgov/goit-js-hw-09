@@ -13,9 +13,7 @@ function createPromisesOnSubmit(event) {
   const stepTime = Number(step.value);
   const amountNumber = Number(amount.value);
 
-  setTimeout(() => {
-    createPromises(amountNumber, stepTime);
-  }, delayTime);
+    createPromises(amountNumber, stepTime, delayTime);
 }
 //2
   function createPromise(position, delay) {
@@ -32,12 +30,10 @@ function createPromisesOnSubmit(event) {
     });
   }
 //3
-function createPromises(counter, stepTime) {
+function createPromises(positions, delay, step) {
     
-  let time = 0;
-  
-    for (let i = 0; i <= counter; i += 1){
-      time += stepTime;
+    for (let i = 1; i <= positions; i += 1){
+    let time = delay + step * (i -1 );
 
   createPromise(i, time)
     .then(({ position, delay }) => {
