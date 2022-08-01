@@ -33,7 +33,7 @@ function createPromisesOnSubmit(event) {
 function createPromises(positions, delay, step) {
     
     for (let i = 1; i <= positions; i += 1){
-    let time = delay + step * (i -1 );
+    let time = step + delay * (i -1 );
 
   createPromise(i, time)
     .then(({ position, delay }) => {
